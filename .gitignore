@@ -1,0 +1,7 @@
+DerivedData/
+.build/
+.DS_Store
+*.xcuserstate
+xcuserdata/
+Resources/Model/*.mlpackage/
+Resources/Model/*.mlmodelc/

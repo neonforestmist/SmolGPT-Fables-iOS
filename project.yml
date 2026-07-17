@@ -1,0 +1,74 @@
+name: SmolGPTFables
+options:
+  bundleIdPrefix: com.neonforestmist
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "27.0"
+packages:
+  swift-transformers:
+    url: https://github.com/huggingface/swift-transformers.git
+    exactVersion: 1.3.3
+targets:
+  SmolGPTFables:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Resources
+        buildPhase: resources
+    dependencies:
+      - package: swift-transformers
+        product: Transformers
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.neonforestmist.SmolGPTFables
+        PRODUCT_NAME: SmolGPTFables
+        SWIFT_VERSION: 5.0
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: SmolGPT-Fables
+        LSSupportsOpeningDocumentsInPlace: true
+        UIFileSharingEnabled: true
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+  SmolGPTFablesTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: SmolGPTFables
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.neonforestmist.SmolGPTFablesTests
+        SWIFT_VERSION: 5.0
+  SmolGPTFablesUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: TestsUI
+    dependencies:
+      - target: SmolGPTFables
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.neonforestmist.SmolGPTFablesUITests
+        SWIFT_VERSION: 5.0
+schemes:
+  SmolGPTFables:
+    build:
+      targets:
+        SmolGPTFables: all
+        SmolGPTFablesTests: [test]
+        SmolGPTFablesUITests: [test]
+    test:
+      targets:
+        - SmolGPTFablesTests
+        - SmolGPTFablesUITests
